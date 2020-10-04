@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 const commonConfiguration = require('./webpack.common');
 const webpackConstants = require('./webpack.constants');
 
@@ -22,7 +23,12 @@ const devEnv = {
     hot: true,
     open: true,
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new Dotenv({
+      path: 'dev.env',
+    }),
+  ],
 };
 
 module.exports = commonConfiguration(devEnv);

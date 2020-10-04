@@ -1,1 +1,1 @@
-export * from './station-selector.component';
+export * from './station-details.component';
