@@ -8,6 +8,7 @@ exports.buildPath = resolveFromRootPath('build');
 exports.distPath = resolveFromRootPath('dist');
 exports.assetsPath = resolveFromRootPath('src', 'assets');
 exports.podsPath = resolveFromRootPath('src', 'pods');
+exports.scenesPath = resolveFromRootPath('src', 'scenes');
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 /*const PATIENTS_URL = process.env.PATIENTS_URL || `${BASE_URL}/patients`;

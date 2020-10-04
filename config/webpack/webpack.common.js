@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 var webpack = require('webpack');
-var path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const consts = require('./webpack.constants');
 
 const commonRules = [
@@ -54,8 +55,8 @@ module.exports = (env = {}) => {
       alias: {
         app: consts.srcPath,
         pods: consts.podsPath,
-        // common: webpackConstants.commonPath,
-        // assets: webpackConstants.assetsPath
+        assets: consts.assetsPath,
+        scenes: consts.scenesPath,
       },
     },
     entry: {

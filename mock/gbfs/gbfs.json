@@ -1,1 +1,42 @@
-{"last_updated": 1601068400, "ttl": -1, "data": {"en": {"feeds": [{"name": "system regions", "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/system_regions"}, {"name": "system_information", "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/system_information"}, {"name": "nearby_stations", "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/station_information/{station_id}/nearby_stations"}, {"name": "station_status", "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/station_status"}, {"name": "system_pricing_plans", "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/system_pricing_plans"}, {"name": "station_information", "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/station_information"}, {"name": "station_status_snapshots", "url": "http://localhost:8000/gbfs/station_information/{timestamp}.json"}, {"name": "snapshots_information", "url": "http://localhost:8000/gbfs/snapshots.json"}]}}}
+{
+  "last_updated": 1601068400,
+  "ttl": -1,
+  "data": {
+    "en": {
+      "feeds": [
+        {
+          "name": "system regions",
+          "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/system_regions"
+        },
+        {
+          "name": "system_information",
+          "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/system_information"
+        },
+        {
+          "name": "nearby_stations",
+          "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/station_information/{station_id}/nearby_stations"
+        },
+        {
+          "name": "station_status",
+          "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/station_status"
+        },
+        {
+          "name": "system_pricing_plans",
+          "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/system_pricing_plans"
+        },
+        {
+          "name": "station_information",
+          "url": "https://barcelona-sp.publicbikesystem.net/ube/gbfs/v1/en/station_information"
+        },
+        {
+          "name": "station_status_snapshots",
+          "url": "http://localhost:8000/gbfs/station_information/{timestamp}.json"
+        },
+        {
+          "name": "snapshots_information",
+          "url": "http://localhost:8000/gbfs/snapshots.json"
+        }
+      ]
+    }
+  }
+}
