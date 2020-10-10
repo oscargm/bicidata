@@ -13,7 +13,8 @@ import { mapStationStatus } from './mappers';
 import { getStationStatus } from './api/station.service';
 import { StatusIcon } from 'pods/common';
 import mechanicalIcon from 'assets/mechanical.png';
-import ebikeIcon from 'assets/mechanical.png';
+import ebikeIcon from 'assets/ebike.png';
+import dockIcon from 'assets/dock.png';
 
 const useStyles = makeStyles((theme) => ({
   container: { display: 'flex', justifyContent: 'center' },
@@ -28,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
   bikeIcon: {
     boxSizing: 'border-box',
-    paddingRight: '1rem',
+    padding: ' 1.5rem 5rem 1.5rem 0rem',
     backgroundPosition: 'center right',
-    backgroundSize: '0.5rem 0.5rem',
+    backgroundSize: '4rem 4rem',
     backgroundRepeat: 'no-repeat',
   },
   mechanical: {
@@ -38,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
   ebike: {
     backgroundImage: `url(${ebikeIcon})`,
+  },
+  dock: {
+    backgroundImage: `url(${dockIcon})`,
   },
 }));
 
@@ -84,9 +88,11 @@ export const StationDetails: React.FC<StationDetailsProps> = (
             </div>
             <div className={classes.field}>
               <Typography variant={'subtitle1'}>Docks</Typography>
-              <Typography variant={'subtitle2'}>
-                {stationStatusDetail.docks_available}
-              </Typography>
+              <div className={`${classes.bikeIcon} ${classes.dock}`}>
+                <Typography variant={'subtitle2'}>
+                  {stationStatusDetail.docks_available}
+                </Typography>
+              </div>
             </div>
             <StatusIcon
               label={'Renting'}
