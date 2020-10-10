@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { StationSelector } from 'pods/system';
 import { StationDetails } from 'pods/station';
 import { makeStyles } from '@material-ui/core';
+import { StationInformation } from 'pods/system/model';
 
 const useStyles = makeStyles((theme) => ({
   landing: { display: 'flex', flexDirection: 'column' },
@@ -11,9 +12,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const Landing: React.FC = () => {
   const classes = useStyles();
-  const [stationIdSelected, setStationIdSelected] = React.useState<string>('');
-  const onSelectStation = (stationId: string) => {
-    setStationIdSelected(stationId);
+  const [stationSelected, setStationSelected] = React.useState<
+    StationInformation
+  >(null);
+  const onSelectStation = (station: StationInformation) => {
+    console.log('stationSelected', station);
+    setStationSelected(station);
   };
   return (
     <div className={classes.landing}>
@@ -22,11 +26,11 @@ export const Landing: React.FC = () => {
       </div>
       <div className={classes.selector}>
         <StationSelector
-          stationSelected={stationIdSelected}
+          stationSelected={stationSelected}
           onSelectStation={onSelectStation}
         />
       </div>
-      <StationDetails stationId={stationIdSelected} />
+      <StationDetails station={stationSelected} />
     </div>
   );
 };

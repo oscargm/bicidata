@@ -5,11 +5,13 @@ import {
   FormControl,
   makeStyles,
   FormHelperText,
+  Typography,
+  InputLabel,
+  NativeSelect,
 } from '@material-ui/core';
-import { SystemStatus } from './model';
+import { StationInformation, SystemStatus } from './model';
 import { getSystemStatus } from './api/system.service';
 import { mapSystemStatus } from './mappers';
-import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -22,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface StationSelectorProps {
-  stationSelected: string;
-  onSelectStation: (stationId: string) => void;
+  stationSelected: StationInformation;
+  onSelectStation: (station: StationInformation) => void;
 }
 
 export const StationSelector: React.FC<StationSelectorProps> = (
@@ -43,27 +45,24 @@ export const StationSelector: React.FC<StationSelectorProps> = (
     <>
       {availableStations?.stations?.length > 0 ? (
         <FormControl className={classes.formControl}>
-          <Select
-            value={stationSelected}
-            onChange={(
-              event: React.ChangeEvent<{
-                name?: string;
-                value: unknown;
-              }>
-            ) => onSelectStation(String(event.target.value))}
-            displayEmpty
-            className={classes.selectEmpty}
-            inputProps={{ 'aria-label': 'Select a station' }}
+          <InputLabel htmlFor="stationSelector">Select a station</InputLabel>
+          <NativeSelect
+            id="stationSelector"
+            onChange={(event: any) =>
+              onSelectStation(
+                availableStations.stations.find(
+                  (station) => station.id === event.target.value
+                )
+              )
+            }
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
+            <option value=""></option>
             {availableStations.stations.map((station) => (
-              <MenuItem key={`station-${station.id}`} value={station.id}>
+              <option key={`station-${station.id}`} value={station.id}>
                 {station.name}
-              </MenuItem>
+              </option>
             ))}
-          </Select>
+          </NativeSelect>
           <FormHelperText>Select a station</FormHelperText>
         </FormControl>
       ) : (
