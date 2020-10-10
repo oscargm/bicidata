@@ -1,16 +1,43 @@
 import * as React from 'react';
+
+import {
+  Card,
+  CardContent,
+  Container,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
+import { StationInformation } from 'pods/system/model';
 import { StationStatusDetail } from './model';
 import { mapStationStatus } from './mappers';
 import { getStationStatus } from './api/station.service';
-import { makeStyles } from '@material-ui/core';
-import { StationInformation } from 'pods/system/model';
+import { StatusIcon } from 'pods/common';
+import mechanicalIcon from 'assets/mechanical.png';
+import ebikeIcon from 'assets/mechanical.png';
 
 const useStyles = makeStyles((theme) => ({
+  container: { display: 'flex', justifyContent: 'center' },
+  stationDetails: {
+    width: '50%',
+  },
   information: { display: 'flex', flexDirection: 'column' },
   field: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  bikeIcon: {
+    boxSizing: 'border-box',
+    paddingRight: '1rem',
+    backgroundPosition: 'center right',
+    backgroundSize: '0.5rem 0.5rem',
+    backgroundRepeat: 'no-repeat',
+  },
+  mechanical: {
+    backgroundImage: `url(${mechanicalIcon})`,
+  },
+  ebike: {
+    backgroundImage: `url(${ebikeIcon})`,
   },
 }));
 
@@ -32,45 +59,50 @@ export const StationDetails: React.FC<StationDetailsProps> = (
         setStationStatusDetail(mapStationStatus(response, station.id))
       );
   }, [station]);
-  return stationStatusDetail !== null ? (
-    <>
-      <div className={classes.information}>
-        {Object.keys(stationStatusDetail).map((k, i) =>
-          typeof stationStatusDetail[k] === 'object' ? (
-            Object.keys(stationStatusDetail[k]).map((ok, j) => (
-              <div key={`field-${k}-${j}`} className={classes.field}>
-                <span>{`${k}:${ok}`}</span>
-                <span>{stationStatusDetail[k][ok]}</span>
+  return (
+    stationStatusDetail !== null && (
+      <Container className={classes.container} maxWidth={'xl'}>
+        <Card className={classes.stationDetails}>
+          <CardContent className={classes.information}>
+            <Typography variant={'h6'}>{station.name}</Typography>
+            <div className={classes.field}>
+              <div>
+                <Typography variant={'subtitle1'}>Bikes</Typography>
               </div>
-            ))
-          ) : (
-            <div key={`field-${k}`} className={classes.field}>
-              <span>{k}</span>
-              <span>{stationStatusDetail[k]}</span>
+              <div>
+                <div className={`${classes.bikeIcon} ${classes.mechanical}`}>
+                  <Typography variant={'subtitle2'}>
+                    {stationStatusDetail.bikes_available.mechanical}
+                  </Typography>
+                </div>
+                <div className={`${classes.bikeIcon} ${classes.ebike}`}>
+                  <Typography variant={'subtitle2'}>
+                    {stationStatusDetail.bikes_available.ebike}
+                  </Typography>
+                </div>
+              </div>
             </div>
-          )
-        )}
-      </div>
-      <iframe
-        width="300"
-        height="170"
-        frameBorder="0"
-        scrolling="no"
-        src={`https://maps.google.com/maps?q=${station.location.lat},${station.location.lon}&hl=es&z=14&amp;output=embed`}
-      ></iframe>
-      <br />
-      <small>
-        <a
-          href={`https://maps.google.com/maps?q=${station.location.lat},${station.location.lon}&hl=es;z=14&amp;output=embed`}
-          style={{ color: '#0000FF', textAlign: 'left' }}
-          target="_blank"
-          rel="noreferrer"
-        >
-          See map bigger
-        </a>
-      </small>
-    </>
-  ) : (
-    <span>loading...</span>
+            <div className={classes.field}>
+              <Typography variant={'subtitle1'}>Docks</Typography>
+              <Typography variant={'subtitle2'}>
+                {stationStatusDetail.docks_available}
+              </Typography>
+            </div>
+            <StatusIcon
+              label={'Renting'}
+              status={stationStatusDetail.is_renting}
+            />
+            <StatusIcon
+              label={'Returning'}
+              status={stationStatusDetail.is_returning}
+            />
+            <StatusIcon
+              label={'Charging'}
+              status={stationStatusDetail.is_charging}
+            />
+          </CardContent>
+        </Card>
+      </Container>
+    )
   );
 };

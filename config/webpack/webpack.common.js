@@ -18,6 +18,15 @@ const commonRules = [
     ],
   },
   {
+    test: /\.(png|jpg|gif)$/,
+    use: [
+      {
+        loader: 'file-loader',
+        options: { name: '[path][name].[ext]' },
+      },
+    ],
+  },
+  {
     test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
     loader: 'url-loader',
     options: {
